@@ -5,7 +5,6 @@ body {
   justify-content: center;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
-  height: 100vh;
 }
 .container {
   padding: 30px;
@@ -14,4 +13,12 @@ body {
   width: 1000px;
   border: 1px solid white;
   border-radius: 10px;
+  a {
+    text-decoration: none;
+    color: gray;
+    text-transform: uppercase;
+    &:hover {
+      color: brown;
+    }
+  }
 }
