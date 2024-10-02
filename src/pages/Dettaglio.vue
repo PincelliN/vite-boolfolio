@@ -6,7 +6,24 @@ export default {
     name: 'dettaglio',
     data() {
         return {
-            work: {}
+            work: {
+                collaborators: '',
+                created_at: '',
+                description: '',
+                end_date: '',
+                id: '',
+                original_name_img: '',
+                path_img: '',
+                post: '',
+                slug: '',
+                start_date: '',
+                subject: '',
+                technologies: '',
+                title: '',
+                type: '',
+                type_id: '',
+                updated_at: '',
+            }
         }
     },
     computed: {
@@ -28,7 +45,6 @@ export default {
                 } else {
                     this.$router.push({ name: 'NotFound' })
                 }
-
             })
 
 
