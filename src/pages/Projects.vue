@@ -66,12 +66,16 @@ export default {
 
         <div>
             <p>Type</p><br>
-            <button v-for="type in types">{{ type.name }}</button>
+            <button v-for="type in types"><router-link :to="{ name: 'typeproject', params: { slug: type.slug } }">{{
+                type.name
+                    }}</router-link></button>
 
         </div>
         <div>
             <p>Technologies</p>
-            <button v-for="technology in technologies">{{ technology.name }}</button>
+            <button v-for="technology in technologies"><router-link
+                    :to="{ name: 'tecprojects', params: { slug: technology.slug } }">{{
+                        technology.name }}</router-link></button>
         </div>
 
         <ul>
