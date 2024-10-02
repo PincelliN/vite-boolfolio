@@ -2,6 +2,7 @@
 import axios from "axios";
 import { store } from "../store/store";
 import Loader from "../components/partials/Loader.vue";
+import { getType, getTechnologies, getLocalDate } from "../data/function"
 export default {
     name: "Projects",
     components: {
@@ -11,14 +12,15 @@ export default {
         return {
             works: [],
             types: [],
-            technologis: [],
+            technologies: [],
             loaderState: true,
             paginatorData: {
                 currentpage: 1,
                 links: [],
             },
-            typeFilter: '',
-            technologiesFilter: ''
+            getType,
+            getTechnologies,
+            getLocalDate
         };
     },
     methods: {
@@ -41,14 +43,15 @@ export default {
 
                 })
                 .catch((error) => console.error());
-        },
+        }
     },
     mounted() {
         this.getApi(store.apiUrl + 'works', 'works')
         this.getApi(store.apiUrl + 'types', 'types')
-        this.getApi(store.apiUrl + 'technologis', 'technologis')
+        this.getApi(store.apiUrl + 'technologies', 'technologies')
     },
 };
+
 </script>
 
 <template>
@@ -59,26 +62,26 @@ export default {
         <Loader></Loader>
     </div>
     <div v-else>
-        <div class="select-box">
-            <div>
-                <label for="type">Type</label><br>
-                <select id="type" v-model="typeFilter">
-                    <option value="">scegli il Type</option>
-                    <option v-for="type in types" :value="type.slug">{{ type.name }}</option>
-                </select>
-            </div>
-            <div>
-                <label for="technology">Technology</label><br>
-                <select id="technology" v-model="technologiesFilter">
-                    <option value="">scegli la Technology</option>
-                    <option v-for="technology in technologis" :value="technology.slug">{{ technology.name }}</option>
-                </select>
-            </div>
+
+        <div>
+            <p>Type</p><br>
+            <button v-for="type in types">{{ type.name }}</button>
+
         </div>
+        <div>
+            <p>Technologies</p>
+            <button v-for="technology in technologies">{{ technology.name }}</button>
+        </div>
+
         <ul>
-            <li v-for="work in works" :key="work.id">{{ work.title }}</li>
+            <li v-for="work in works" :key="work.id">
+                <router-link :to="{ name: 'dettaglio', params: { slug: work.slug } }">{{ work.title }}<br>
+                </router-link>
+                <small>Type: {{ getType(work) }} | Technologies:{{ getTechnologies(work) }} |
+                    Data:{{ getLocalDate(work.created_at) }}</small>
+            </li>
         </ul>
-        <div class="paginator">
+        <div class=" paginator">
             <button v-for="(link, index) in paginatorData.links" :key="index" v-html="link.label"
                 :disabled="link.active || link.url == null" @click="getApi(link.url, 'works')"></button>
         </div>
@@ -93,11 +96,7 @@ h2 {
 
 ul {
     list-style: circle;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+
 }
 
 .paginator {
@@ -107,12 +106,5 @@ ul {
     button {
         margin: 5px;
     }
-}
-
-.select-box {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
 }
 </style>
