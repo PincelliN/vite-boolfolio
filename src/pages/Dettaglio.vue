@@ -1,6 +1,7 @@
 <script>
 import { store } from "../store/store";
-import axios from 'axios'
+import axios from 'axios';
+import { getType, getTechnologies, getLocalDate } from "../data/function";
 export default {
     name: 'dettaglio',
     data() {
@@ -8,6 +9,15 @@ export default {
             work: {}
         }
     },
+    computed: {
+        getInfo() {
+            const type = getType(this.work);
+            const tecs = getTechnologies(this.work);
+            const data = getLocalDate(this.work.created_at);
+            return `Type: ${type}  | Technologies:${tecs} | Data: ${data}`
+        }
+    },
+
     methods: {
         getApi(slug) {
             console.log(slug)
@@ -33,5 +43,6 @@ export default {
 </script>
 <template>
     <h1>{{ work.title }}</h1>
+    <p>{{ getInfo }}</p>
 </template>
 <style></style>

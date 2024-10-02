@@ -6,7 +6,7 @@ const getType = (work) => {
 };
 
 const getTechnologies = (work) => {
-  if (work.technologies.length > 0) {
+  if (work.technologies.length) {
     let ListTechnologies = [];
     work.technologies.forEach((tec, i) => {
       if (i == work.technologies.length - 1) {

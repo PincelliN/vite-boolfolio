@@ -2,7 +2,7 @@
 import axios from "axios";
 import { store } from "../store/store";
 import Loader from "../components/partials/Loader.vue";
-import { getType, getTechnologies, getLocalDate } from "../data/function"
+import { getType, getTechnologies, getLocalDate } from "../data/function";
 export default {
     name: "Projects",
     components: {
