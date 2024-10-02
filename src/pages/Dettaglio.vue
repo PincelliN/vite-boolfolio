@@ -53,12 +53,17 @@ export default {
     mounted() {
         const slug = this.$route.params.slug
         this.getApi(slug)
-        console.log(this.$route.params.slug);
+
     }
 }
 </script>
 <template>
     <h1>{{ work.title }}</h1>
     <p>{{ getInfo }}</p>
+    <img :src="work.path_img" alt="">
 </template>
-<style></style>
+<style lang="scss">
+img {
+    width: 200px;
+}
+</style>

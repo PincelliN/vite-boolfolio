@@ -30,15 +30,16 @@ export default {
                 .then((result) => {
 
                     if (element === 'works') {
-                        console.log(element);
+
                         this[element] = result.data.works.data;
                         this.paginatorData.currentpage = result.data.works.current_page;
                         this.paginatorData.links = result.data.works.links;
                         this.loaderState = false;
+                        console.log(this[element]);
                     } else {
                         console.log(element);
                         this[element] = result.data.result
-                        console.log(this[element]);
+
                     }
 
                 })
